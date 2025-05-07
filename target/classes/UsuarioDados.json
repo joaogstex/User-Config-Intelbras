@@ -1,0 +1,48 @@
+{
+    "UserList": [
+        {
+            "UserID": "5",
+            "UserName": "test",
+            "UserType": 0,
+            "Authority": 1,
+            "Password": "234",
+            "Doors": [0],
+            "TimeSections": [255],
+            "ValidFrom": "2019-01-02 00:00:00",
+            "ValidTo": "2037-01-02 01:00:00"
+        },
+        {
+            "UserID": "6",
+            "UserName": "test",
+            "UserType": 0,
+            "Password": "234",
+            "Doors": [0],
+            "TimeSections": [255],
+            "SpecialDaysSchedule": [255],
+            "ValidFrom": "2019-01-02 00:00:00",
+            "ValidTo": "2037-01-02 01:00:00"
+        },
+        {
+            "UserID": "7",
+            "UserName": "test",
+            "UserType": 0,
+            "UserStatus": 0,
+            "Password": "234",
+            "Doors": [0],
+            "TimeSections": [255],
+            "ValidFrom": "2019-01-02 00:00:00",
+            "ValidTo": "2037-01-02 01:00:00"
+        },
+        {
+            "UserID": "8",
+            "UserName": "test",
+            "UserType": 0,
+            "UserStatus": 0,
+            "Password": "234",
+            "Doors": [0],
+            "TimeSections": [255],
+            "ValidFrom": "2019-01-02 00:00:00",
+            "ValidTo": "2037-01-02 01:00:00"
+        }
+    ]
+}

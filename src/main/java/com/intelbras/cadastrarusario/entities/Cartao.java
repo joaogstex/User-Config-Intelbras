@@ -1,4 +1,4 @@
-package com.intelbras.cadastrarusario;
+package com.intelbras.cadastrarusario.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -19,8 +19,6 @@ public class Cartao {
     private String validDateStart;
     @JsonProperty("ValidDateEnd")
     private String validDateEnd; 
-
-    public Cartao() {}
 
     public String getInsert() {
         return insert;

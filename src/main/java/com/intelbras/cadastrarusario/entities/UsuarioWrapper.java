@@ -1,4 +1,4 @@
-package com.intelbras.cadastrarusario;
+package com.intelbras.cadastrarusario.entities;
 
 import java.util.List;
 

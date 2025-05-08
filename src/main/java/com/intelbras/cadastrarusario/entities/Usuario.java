@@ -1,4 +1,4 @@
-package com.intelbras.cadastrarusario;
+package com.intelbras.cadastrarusario.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
@@ -40,8 +40,6 @@ public class Usuario {
 
     @JsonProperty("UserStatus")
     private Integer userStatus; 
-
-    public Usuario() {}
 
     public String getUserID() {
         return userID;

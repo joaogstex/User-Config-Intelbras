@@ -1,4 +1,4 @@
-package com.intelbras.cadastrarusario;
+package com.intelbras.cadastrarusario.controller;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -7,24 +7,36 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.security.MessageDigest;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.intelbras.cadastrarusario.entities.UsuarioWrapper;
 
 public class Cadastro {
 
     // updateMulti
     private static final String IP = "192.168.1.49";
     private static final String POST_URL = "http://" + IP + "/cgi-bin/AccessUser.cgi?action=insertMulti";
-    private static final String GET_URL = "http://" + IP + "/cgi-bin/recordUpdater.cgi?action=insert&name=AccessControlCard&CardNo=AF79FCC9&CardStatus=0&CardName=AlexandreAlves&UserID=15&Password=112233&ValidDateStart=20151022%20093811&ValidDateEnd=20151222%20093811";
+    private static final String GET_URL = "http://" + IP
+            + "/cgi-bin/recordUpdater.cgi?action=insert&name=AccessControlCard&CardNo=AF79FCC8&CardStatus=0&CardName=AlexandreAlves&UserID=14&Password=112233&ValidDateStart=20151022%20093811&ValidDateEnd=20151222%20093811";
+    private static final String GET_ALL_USERS_URL = "http://" + IP
+            + "/cgi-bin/recordFinder.cgi?action=doSeekFind&name=AccessControlCard&count=10";
+    // private static final String OFFSET = "http://"+ IP
+    // +"/cgi-bin/recordFinder.cgi?action=doSeekFind&name=AccessControlCard&count=1024&offset=1024";
+    private static final String GET_ALL_REGISTERED_USERS_URL = "http://" + IP
+            + "/cgi-bin/recordFinder.cgi?action=getQuerySize&name=AccessUserInfo";
+    private static final String GET_USERS_CARD_NO_URL = "http://" + IP
+            + "/cgi-bin/AccessCard.cgi?action=list&CardNoList[0]=0C9490973";
     private static final String USERNAME = "admin";
     private static final String PASSWORD = "Ec0ground";
     private static final HttpClient client = HttpClient.newHttpClient();
-    
+
     public void sendAndGetUser() throws Exception {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("UsuarioDados.json");
         if (inputStream == null) {
@@ -41,11 +53,30 @@ public class Cadastro {
         System.out.println("[GET] Status: " + responseGet.statusCode());
         System.out.println("[GET] Body: " + responseGet.body());
 
-        //POST tradicional para cadastrar usuários com JSON no Body da aplicação
+        // POST tradicional para cadastrar usuários com JSON no Body da aplicação
         HttpResponse<String> responsePost = sendWithDigestAuth(POST_URL, "POST", json);
         System.out.println("[POST] Status: " + responsePost.statusCode());
         System.out.println("[POST] Body: " + responsePost.body());
+    }
 
+    public void obterTodosUsuarios() throws Exception {
+        HttpResponse<String> responseGetAllUsers = sendWithDigestAuth(GET_ALL_USERS_URL, "GET", null);
+        System.out.println("[GET] Status: " + responseGetAllUsers.statusCode());
+        System.out.println("[GET] Body: " + responseGetAllUsers.body());
+    }
+
+    public void acessarUsuarioInfo() throws Exception {
+        HttpResponse<String> responseGetAllRegisteredUsers = sendWithDigestAuth(GET_ALL_REGISTERED_USERS_URL, "GET",
+                null);
+        System.out.println("[GET] Status: " + responseGetAllRegisteredUsers.statusCode());
+        System.out.println(responseGetAllRegisteredUsers.body());
+    }
+
+    public void obterUsuarioPorCardNo() throws Exception {
+        HttpResponse<String> responseGetUsersPerCardNo = sendWithDigestAuth(GET_USERS_CARD_NO_URL, "GET", null);
+        System.out.println("[GET] Status: " + responseGetUsersPerCardNo.statusCode());
+        String body = responseGetUsersPerCardNo.body();
+        System.out.println(body);
     }
 
     public static HttpResponse<String> sendWithDigestAuth(String url, String method, String jsonBody) throws Exception {
@@ -96,7 +127,8 @@ public class Cadastro {
                 .header("Content-Type", "application/json")
                 .header("Authorization", authorization)
                 .method(method,
-                jsonBody != null ? HttpRequest.BodyPublishers.ofString(jsonBody) : HttpRequest.BodyPublishers.noBody());
+                        jsonBody != null ? HttpRequest.BodyPublishers.ofString(jsonBody)
+                                : HttpRequest.BodyPublishers.noBody());
 
         return client.send(authRequest.build(), HttpResponse.BodyHandlers.ofString());
     }
@@ -119,5 +151,4 @@ public class Cadastro {
         }
         return sb.toString();
     }
-
 }

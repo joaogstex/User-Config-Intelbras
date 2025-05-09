@@ -7,10 +7,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.security.MessageDigest;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,9 +18,9 @@ import com.intelbras.cadastrarusario.entities.UsuarioWrapper;
 
 public class Cadastro {
 
-    // updateMulti
     private static final String IP = "192.168.1.49";
-    private static final String POST_URL = "http://" + IP + "/cgi-bin/AccessUser.cgi?action=insertMulti";
+    //insertMulti
+    private static final String POST_URL = "http://" + IP + "/cgi-bin/AccessUser.cgi?action=insert";
     private static final String GET_URL = "http://" + IP
             + "/cgi-bin/recordUpdater.cgi?action=insert&name=AccessControlCard&CardNo=AF79FCC8&CardStatus=0&CardName=AlexandreAlves&UserID=14&Password=112233&ValidDateStart=20151022%20093811&ValidDateEnd=20151222%20093811";
     private static final String GET_ALL_USERS_URL = "http://" + IP
@@ -33,7 +31,9 @@ public class Cadastro {
             + "/cgi-bin/recordFinder.cgi?action=getQuerySize&name=AccessUserInfo";
     private static final String GET_USERS_CARD_NO_URL = "http://" + IP
             + "/cgi-bin/AccessCard.cgi?action=list&CardNoList[0]=0C9490973";
-    private static final String USERNAME = "admin";
+    private static final String GET_USERS_REC_NO_URL = "http://" + IP 
+            + "/cgi-bin/recordUpdater.cgi?action=get&name=AccessControlCard&recno=5";
+            private static final String USERNAME = "admin";
     private static final String PASSWORD = "Ec0ground";
     private static final HttpClient client = HttpClient.newHttpClient();
 
@@ -76,6 +76,13 @@ public class Cadastro {
         HttpResponse<String> responseGetUsersPerCardNo = sendWithDigestAuth(GET_USERS_CARD_NO_URL, "GET", null);
         System.out.println("[GET] Status: " + responseGetUsersPerCardNo.statusCode());
         String body = responseGetUsersPerCardNo.body();
+        System.out.println(body);
+    }
+
+    public void obterUsuarioRecNo() throws Exception {
+        HttpResponse<String> responseGetUsersPerRecNo = sendWithDigestAuth(GET_USERS_REC_NO_URL, "GET", null);
+        System.out.println("[GET] Status: " + responseGetUsersPerRecNo.statusCode());
+        String body = responseGetUsersPerRecNo.body();
         System.out.println(body);
     }
 

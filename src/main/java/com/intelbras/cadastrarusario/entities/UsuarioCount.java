@@ -7,8 +7,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class UsuarioCount {
     @JsonProperty("AccessUserInfo")
     private String accessUserInfo;
+
     @JsonProperty("AccessControlCard")
     private Integer accessControlCard;
+    
     @JsonProperty("count")
     private Integer count;
 

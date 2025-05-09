@@ -5,18 +5,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Cartao {
     @JsonProperty("insert")
     private String insert;
+
     @JsonProperty("CardNo")
     private String cardNo;
+
     @JsonProperty("CardStatus")
     private Integer cardStatus;
+
     @JsonProperty("CardName")
     private String cardName;
+
     @JsonProperty("UserID")
     private Integer userId;
+
     @JsonProperty("Password")
     private Integer password;
+
     @JsonProperty("ValidDateStart")
     private String validDateStart;
+    
     @JsonProperty("ValidDateEnd")
     private String validDateEnd; 
 

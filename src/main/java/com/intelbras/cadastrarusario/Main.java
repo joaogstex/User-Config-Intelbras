@@ -8,6 +8,7 @@ public class Main {
         //cadastro.sendAndGetUser();
         //cadastro.obterTodosUsuarios();
         //cadastro.acessarUsuarioInfo();
-        cadastro.obterUsuarioPorCardNo();
+        //cadastro.obterUsuarioPorCardNo();
+        cadastro.obterUsuarioRecNo();
     }
 }

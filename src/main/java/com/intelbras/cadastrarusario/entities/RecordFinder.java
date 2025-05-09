@@ -7,8 +7,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class RecordFinder {
     @JsonProperty("doSeekFind")
     private String doSeekFind;
+
     @JsonProperty("accessControlCard")
     private Integer accessControlCard;
+    
     @JsonProperty("count")
     private Integer count;
 
